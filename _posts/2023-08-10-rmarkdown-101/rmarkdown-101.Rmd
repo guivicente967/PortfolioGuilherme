@@ -1,23 +1,164 @@
 ---
 title: "RMarkdown 101"
 description: |
-  A short description of the post.
+  Dicas e truques para posts utilizando RMarkdown.
 author:
-  - name: Nora Jones
-    url: https://example.com/norajones
+  - name: Gui Vicente
+    
 date: 2023-08-10
 output:
   distill::distill_article:
     self_contained: false
 ---
 
-
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = FALSE)
 ```
 
-Distill is a publication format for scientific and technical writing, native to the web.
+Anotações tomadas durante a aula da Semana Data Science na Prática, da Curso R. O objetivo é aprender marcações básicas, como negrito, itálico, bem como inserir textos com código.
 
-Learn more about using Distill at <https://rstudio.github.io/distill>.
+A aula também aborda como dimensionar imagens, plotar gráficos e ocultar as linhas de código.
 
+obs: ao usar o pacote ´distill´ para criação de posts, não utilizar acento no nome do post. Depois arrumar o cabeçalho do arquivo .rmd.
 
+## Marcações
+
+### **negrito**:
+
+-   utilizamos dois asteriscos
+
+Este é o meu **primeiro post** do blog
+
+### *itálico*:
+
+-   utilizamos apenas um asterisco
+
+Este é o meu *primeiro post* do blog
+
+### ~~texto riscado~~:
+
+-   utilziamos dois tils
+
+Este é o meu ~~primeiro post~~ do blog
+
+### [underline] { .underline}:
+
+-   utilizamos o trecho do texto desejado entre colchetes, seguido do comando {.ul}
+
+Este é o meu [primeiro post]{.underline} do blog
+
+### Inserindo um texto com código:
+
+-   utilizamos a crase
+
+`usethis::create_post`
+
+### Como colocar um link:
+
+-   inserimos entre colchetes o nome do link clicável, seguido de parenteses contendo o link de origem.
+
+[Portfolio do Vicente](https://guivicente967.github.io/PortfolioGuilherme/)
+
+## Listas
+
+### Listas não numeradas (bullet points)
+
+utilizamos traço (-) para separar cada bullet point
+
+-   gui
+-   ro
+-   kiwi
+-   bolo
+
+### Listas numeradas
+
+utilizamos o (1.) para sequnciar os nomes, e o Rstudio entende a oredenação
+
+1.  gui
+2.  ro
+3.  kiwi
+4.  bolo
+
+## Títulos e subtítulos
+
+utilizamos o \# para hieraquizar os posts. Apenas um \# é o título principal, e o número de jogos da velha usados define a estrutura do arquivo.
+
+## Imagens
+
+Para inserir uma imagens, utilizamos o mesmo tipo de marcação para inserir links, os colchetes+parenteses, porém os colchetes são precedidos de uma exclamação. ! [ ] ( ). Serve para referências de imagens e GIFs.
+
+Para fins de acessibilidade, podemos acrescentar uma descrição da imagem dentro dos colhcetes.
+
+![](https://media.giphy.com/media/xT0xeJpnrWC4XWblEk/giphy-downsized-large.gif)
+
+## Inserindo códigos
+
+precisamos inserir CHUNK de código, que significa que são campos nos quais os códigos rodam.
+
+para inserir, basta clicar no C+ em verde no topo desta seção.
+
+```{r echo=TRUE}
+# aqui inserimos o código em R
+
+1+1
+
+```
+
+No chunk de código, clicando na engrenagem, podemos alterar as opções de visulização do resultado do código, sendo as opções:
+
+- show output only
+- show code and output
+- show nothing (run code)
+- show nothing (don't run code)
+
+## Inserindo Tabela
+
+criar um novo campo de código, e inserir na função abaixo a tabela desejada
+
+`knitr::kable(mtcars)`
+
+```{r}
+knitr::kable(mtcars)
+```
+
+a função traz toda a tabela, desse forma é ideial para trazer resultados sumarizados.
+
+## Gráficos
+
+Basta inserir novo campo de código:
+
+```{r echo=TRUE, out.width="90%", fig.align='center', dpi=300, fig.cap="gráfico da base mtcars"}
+plot(mtcars$mpg, mtcars$hp)
+```
+
+Após isso, podemos configurar o plot através dos seguintes comandos:
+
+- out.width="x%"
+
+este comando altera a porcentagem de ocupação do gráfico, e é representado através de uma porcentagem
+
+- fig.align=""
+
+este comando altera o alinhamento da figura
+
+- dpi=
+
+melhora a qualidade da imagem/gráfico
+
+- fig.cap=""
+
+insere legendas na imagem
+
+Dessa forma configuração do chunk ficou assim:
+
+- {r echo=TRUE, out.width="90%", fig.align='center', dpi=300, fig.cap="gráfico da base mtcars"}
+
+## Inserindo código em linha
+
+Para inserir um código em uma linha de texto, e para que esse código seja executado, utilizamos a crase, como mencionado no começo do texto, e após isso a letra. O RStudio entenderá o código e rodará.
+
+Importante ressaltar que é recomendado apenas códigos pequenas, como no exemplo abaixo.
+
+A função `sys.date` nos trás a data de hoje.
+
+Hoje é dia `r Sys.Date()`
